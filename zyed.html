@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lime Screen Entertainment | Kids Shoot Booking</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 700px;
+      background: #111;
+      margin: 50px auto;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+      text-align: center;
+    }
+    img.logo {
+      width: 180px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #FFD700;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      text-align: left;
+    }
+    label {
+      font-weight: 600;
+      color: #FFD700;
+    }
+    input, select {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #222;
+      color: #fff;
+      font-size: 16px;
+    }
+    input:focus, select:focus {
+      outline: 2px solid #FFD700;
+    }
+    button {
+      background: #FFD700;
+      color: #000;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #e5c100;
+    }
+    .success-message {
+      color: #90EE90;
+      margin-top: 15px;
+      display: none;
+    }
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="Logo_LimeScreen.png" class="logo" alt="Lime Screen Entertainment Logo">
+    <h1>Kids Shoot Booking</h1>
+    <p>Book your slot for this weekend’s exciting e-commerce shoot!</p>
+
+    <form id="bookingForm">
+      <label>Parent Name</label>
+      <input type="text" id="parentName" required />
+
+      <label>Kid Name</label>
+      <input type="text" id="kidName" required />
+
+      <label>Age</label>
+      <input type="number" id="age" required />
+
+      <label>Phone Number</label>
+      <input type="tel" id="phone" required />
+
+      <label>Email</label>
+      <input type="email" id="email" required />
+
+      <label>Preferred Date</label>
+      <input type="date" id="date" required />
+
+      <label>Time Slot</label>
+      <select id="timeSlot" required>
+        <option value="">Select</option>
+        <option>Saturday 10AM - 1PM</option>
+        <option>Saturday 2PM - 4PM</option>
+        <option>Sunday 10AM - 1PM</option>
+        <option>Sunday 2PM - 4PM</option>
+      </select>
+
+      <button type="submit">Submit Booking</button>
+      <p class="success-message" id="successMsg">Thank you! Your slot has been booked successfully 🎉</p>
+    </form>
+  </div>
+
+  <footer>
+    📞 +91 87921 39994 | ✉️ zyedlimescreenbangalore@gmail.com <br>
+    © 2025 Lime Screen Entertainment & Productions
+  </footer>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxJIyyp6TfNBQmSvsLB1pAF8-NTNdeeu0BuyyvelJzhJxCBRSHMGR-7HzRP42Svxpso1Q/exec";
+
+    const form = document.getElementById('bookingForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {
+        parentName: form.parentName.value,
+        kidName: form.kidName.value,
+        age: form.age.value,
+        phone: form.phone.value,
+        email: form.email.value,
+        date: form.date.value,
+        timeSlot: form.timeSlot.value
+      };
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      }).then(res => {
+        successMsg.style.display = 'block';
+        form.reset();
+      }).catch(err => alert('Error submitting form!'));
+    });
+  </script>
+</body>
+</html>
